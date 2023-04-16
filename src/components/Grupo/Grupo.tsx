@@ -3,7 +3,7 @@ import {  BoxHeader } from "../styles";
 import { ConfirmButton } from "../styles";
 import { Box } from "../styles";
 import { Container, Header } from "../styles";
-import { CreateButton, InputHeader, InputUserBox, ModalInputUser, PlusButton, UserGroup } from "./styles";
+import { CreateButton, InputHeader, InputUserBox, ModalInputUser, PlusButton, UserGroup } from "./Group";
 import '../../types/user'
 import { User } from "../../types/user";
 
