@@ -66,6 +66,9 @@ export const ConfirmButton = styled.button`
   box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.5);
   font-size: 3rem;
   margin: 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 export const ContainerButton = styled.div`
   width: 100%;

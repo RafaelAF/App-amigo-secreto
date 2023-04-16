@@ -4,9 +4,10 @@ import  {Box, BoxHeader, EnterButton, FloatButton, Header, InputBox} from '../..
 
 type Props = {
     onCreate: (value: boolean) => void
+    onEntry: (value: boolean) => void
 }
 
-export const Inicio = ({onCreate}: Props) => {
+export const Inicio = ({onCreate, onEntry}: Props) => {
 
     const [groupName, setGroupName] = useState('')
 
@@ -17,11 +18,12 @@ export const Inicio = ({onCreate}: Props) => {
 
     const handleCheckName = () =>{
         if(groupName == 'Grupo de jovens'){
-            console.log('entrei')
+            onEntry(true)
         }else{
             alert('Este Grupo não existe')
         }
     }
+
     const handleCreateGroup = () => {
         const confirmacao = confirm('Criando grupo')
         console.log(confirmacao)

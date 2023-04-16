@@ -1,5 +1,5 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { BlackContainer, BoxHeader, InputBox } from "../styles";
+import { ChangeEvent, useState } from "react";
+import {  BoxHeader } from "../styles";
 import { ConfirmButton } from "../styles";
 import { Box } from "../styles";
 import { Container, Header } from "../styles";
@@ -7,13 +7,22 @@ import { CreateButton, InputHeader, InputUserBox, ModalInputUser, PlusButton, Us
 import '../../types/user'
 import { User } from "../../types/user";
 
+import dados from '../../assets/dados.svg'
+
+
+
 
 export const Grupo = () => {
 
     const [modalInput, setModalInput] = useState(false)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+
+    const [atualName, setAtualName] = useState('')
+    const [atualEmail, setAtualEmail] = useState('')
+
     const [users, setUsers] = useState<User[]>([])
+    const [editUser, setEditUser] = useState(false)
 
     // useEffect(()=>{
     //     if(users){
@@ -49,6 +58,17 @@ export const Grupo = () => {
     const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
     }
+    
+    const handleEditUser = () => {
+        setEditUser(true)
+        
+    }
+    const handleClose = () => {
+        setEditUser(false)
+    }
+    const handleSort = () => {
+        alert('Sorteando')
+    }
 
    
     return (
@@ -60,12 +80,12 @@ export const Grupo = () => {
             </Box>
             <Box>
                 {users.map((elem, index)=>(
-                    <UserGroup key={index}>{elem.name}</UserGroup>
+                    <UserGroup onClick={handleEditUser} data-name={elem.name} data-id={elem.id} data-email={elem.email} key={index}>{elem.name}</UserGroup>
                 ))}
                 
                 
             </Box>
-            <ConfirmButton style={{position: "fixed", bottom: '40px', left:0}}></ConfirmButton>
+            <ConfirmButton onClick={handleSort} style={{position: "fixed", bottom: '40px', left:0}}><img src={dados} /></ConfirmButton>
             <ModalInputUser style={!modalInput ? {display: 'none'} : {display: 'flex'}}>
                 <Box style={{marginBottom: '150px'}}>
                     <InputHeader>Nome:</InputHeader>
@@ -73,6 +93,18 @@ export const Grupo = () => {
                     <InputHeader>Email:</InputHeader>
                     <InputUserBox type="email" value={email} onChange={handleChangeEmail} />
                     <CreateButton onClick={handleSaveUser}>ok</CreateButton>
+                </Box>
+            </ModalInputUser>
+            <ModalInputUser style={!editUser ? {display: 'none'} : {display: 'flex'}}>
+                <Box style={{marginBottom: '150px'}}>
+                    <InputHeader>Nome:</InputHeader>
+                    <InputUserBox type="text" value={atualName} onChange={handleChangeName} />
+                    <InputHeader>Email:</InputHeader>
+                    <InputUserBox type="email" value={atualEmail} onChange={handleChangeEmail} />
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <CreateButton onClick={handleClose}>X</CreateButton>
+                        <CreateButton onClick={handleClose}>V</CreateButton>
+                    </div>
                 </Box>
             </ModalInputUser>
         </Container>
